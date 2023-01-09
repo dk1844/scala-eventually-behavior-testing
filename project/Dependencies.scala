@@ -18,7 +18,9 @@ import sbt._
 object Dependencies {
 
   lazy val dependencies: Seq[ModuleID] = Seq(
-    "org.scalatest"       %% "scalatest"          % "3.2.9"       % Test
+    "org.scalatest"       %% "scalatest"          % "3.2.14"      % Test,
+    "org.apache.spark"    %% "spark-core"         % "3.2.2"       % Provided,
+    "org.apache.spark"    %% "spark-sql"         % "3.2.2"       % Provided
   )
 
 }

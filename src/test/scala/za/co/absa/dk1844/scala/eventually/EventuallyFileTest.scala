@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 ABSA Group Limited
+ * Copyright 2023 ABSA Group Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,32 +21,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import za.co.absa.dk1844.scala.eventually.FilesHelper.removeFile
 
-import java.nio.file.{Files, NoSuchFileException, Path, Paths}
+import java.nio.file.NoSuchFileException
 import scala.collection.mutable
-import scala.concurrent.Future
-import scala.concurrent.duration.{DurationInt, FiniteDuration}
-import scala.concurrent.ExecutionContext.Implicits.global
-
-object FilesHelper {
-  def writeNonEmptyFile(filename: String): Path = {
-    Files.write(Paths.get(filename), "ContentX".getBytes());
-  }
-
-  def writeNonEmptyFileWithDelay(filename: String, delay: FiniteDuration = 500.millis): Future[Unit] = Future {
-    Thread.sleep(delay.toMillis)
-    writeNonEmptyFile(filename)
-  }
-
-  def readFileContentSize(filename: String): Int = Files.readAllBytes(Paths.get(filename)).length
-
-  def removeFile(filename: String): Unit = {
-    Files.deleteIfExists(Paths.get(filename))
-  }
-
-
-}
-
-class EventuallyFullEnclosedTest extends AnyFlatSpec with Matchers with Eventually with BeforeAndAfterAll {
+import scala.concurrent.duration.DurationInt
+class EventuallyFileTest extends AnyFlatSpec with Matchers with Eventually with BeforeAndAfterAll {
 
   val files = Seq("file1", "file2", "file3", "file4")
 
