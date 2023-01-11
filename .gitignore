@@ -1,2 +1,6 @@
+# scala
 *.class
 *.log
+
+# building
+target
